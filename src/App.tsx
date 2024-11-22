@@ -1,26 +1,10 @@
-import "./App.css";
-
-import Intro from "./screens/Intro/Intro";
-import Dashboard from "./screens/Dashboard/Dashboard";
-import Detail from "./screens/Detail/Detail";
-import Form from "./screens/Form/Form";
-
-const poems = [
-  {
-    id: "1",
-    title: "The Road Not Taken",
-    excerpt: "Two roads diverged in a yellow wood",
-  },
-  {
-    id: "2",
-    title: "Ozymandias",
-    excerpt: "I met a traveler from an antique land",
-  },
-  { id: "3", title: "Daffodils", excerpt: "I wandered lonely as a cloud" },
-];
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Form from '../src/screens/Form/Form';
+import Detail from '../src/screens/Detail/Detail';
+import Dashboard from '../src/screens/Dashboard/Dashboard';
+import Intro from '../src/screens/Intro/Intro';
 
 const examplePoem = {
-  title: "Epitaph. Intended for Sir Isaac Newton, in Westminster Abbey.",
   author: "Alexander Pope",
   lines: [
     "    ISAACUS NEWTONUS:",
@@ -35,11 +19,21 @@ const examplePoem = {
   linecount: "7",
 };
 
+const poems = [
+
+];
+
 function App() {
-  return <Form />;
-  // return <Detail poem={examplePoem} onBack={() => {}} />;
-  // return <Dashboard poems={poems} onViewPoem={() => {}} />;
-  // return <Intro onNext={() => {}} />;
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Form />} />
+        <Route path="/detail" element={<Detail poem={examplePoem} onBack={() => {}} />} />
+        <Route path="/dashboard" element={<Dashboard poems={poems} onViewPoem={() => {}} />} />
+        <Route path="/intro" element={<Intro onNext={() => {}} />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
